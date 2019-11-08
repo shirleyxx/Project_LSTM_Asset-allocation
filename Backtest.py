@@ -30,13 +30,11 @@ for i in range(n_rebalance):
     MK.get_returns(returns=sub_returns)
     MK.Markowitz(0.5*min(MK.ann_returns)+0.5*max(MK.ann_returns))  
     mk_returns = np.hstack([mk_returns, np.sum(sub_returns*MK.weights, axis=1)])
-    mk_weights_true = np.vstack([mk_weights_true, MK.weights])
-   
+    
     RP = RiskParityPortfolio.Portfolio()
     RP.get_returns(returns=sub_returns)
     RP.risk_parity()
     rp_returns = np.hstack([rp_returns, np.sum(sub_returns*RP.weights, axis=1)])
-    rp_weights_true = np.vstack([rp_weights_true, RP.weights])
     
 ###########################################
 ### Calculate historical weights
@@ -96,9 +94,9 @@ ax.set_title('Strategies Comparison',fontsize=15)
 ### True vs Prediction
 ###########################################
 fig, ax = plt.subplots(figsize=(12,8))
-ax.plot(np.cumsum(mk_returns[-n_pred:]),label='Markowitz',color='r',alpha=0.6)
+ax.plot(np.cumsum(mk_returns[-n_pred:]),label='Theoretical_Markowitz',color='r',alpha=0.6)
 ax.plot(np.cumsum(mk_returns_pred),'--',color='r', alpha=0.8, label='LSTM_Markowitz')
-ax.plot(np.cumsum(rp_returns[-n_pred:]),label='Risk Parity',color='g',alpha=0.6)
+ax.plot(np.cumsum(rp_returns[-n_pred:]),label='Theoretical_Risk Parity',color='g',alpha=0.6)
 ax.plot(np.cumsum(rp_returns_pred),'--',color='g', alpha=0.8, label='LSTM_Risk Parity')
 ax.tick_params(labelsize=12)
 ax.legend()
