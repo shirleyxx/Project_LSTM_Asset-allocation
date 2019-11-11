@@ -1,7 +1,5 @@
 import numpy as np
 
-rf = 1.814 #US 10 year tresury
-
 n_obs = 252*5
 n_assets = 3
 
