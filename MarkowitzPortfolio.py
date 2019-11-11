@@ -57,10 +57,11 @@ class Portfolio():
         ax = plt.gca()
         ax.plot(self.optimal_vols, self.optimal_returns, 'o', markersize=5, alpha=0.7)
        # ax.plot(self.optimal_vols, self.optimal_returns, 'lightseagreen')
-        ax.set_xlabel('ann vol', fontsize=12)
-        ax.set_ylabel('ann return',fontsize=12)
-        ax.set_title('Efficient Frontier',fontsize=15)
+        ax.set_xlabel('Annual vol', fontsize=12)
+        ax.set_ylabel('Annual return',fontsize=12)
+      #  ax.set_title('Efficient Frontier', fontsize=18)
         ax.tick_params(labelsize=12)
+        plt.savefig('EfficientFrontier.png', dpi=200)
         
 if __name__ == "__main__":
     p = Portfolio()

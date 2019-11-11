@@ -11,7 +11,7 @@ from configs import *
 n_epochs = 30
 time_steps = rebalance_days
 hidden_dim = 20
-batch_size = 30
+batch_size = 60
 activation = None
 loss = 'logcosh'
 
@@ -53,7 +53,7 @@ class LSTM_model():
             y = y.reshape(y.shape[0],1)
 
         print(x.shape, y.shape)
-        self.model.fit(x, y, batch_size=batch_size, epochs=n_epochs, validation_split=0.1, verbose=1)
+        self.model.fit(x, y, batch_size=batch_size, epochs=n_epochs, validation_split=split, verbose=0)
         if plot:
             self.train_plot = self.view_accuracy(self.predict(x), y, 'Train')
             
@@ -73,3 +73,11 @@ class LSTM_model():
         plt.title(plot_name)
         plt.legend(['predict', 'true'])
 
+if __name__=='__main__':
+    returns = rand_returns()
+    seqs_train = create_input(returns[:-1])
+    seqs_pred = np.array(returns[-rebalance_days:])
+    LSTM = LS.LSTM_model()
+    LSTM.build()
+    LSTM.train(seqs_train, split = 0.1)
+    pred_weights = LSTM.predict(seqs_pred)

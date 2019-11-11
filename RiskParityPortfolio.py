@@ -25,7 +25,8 @@ class Portfolio():
     def risk_parity(self):      
         w0          = self.n_assets*[1./self.n_assets] #initial weights
         cov         = np.cov(self.returns.T)*252   
-        risk_budget = self.n_assets*[1./self.n_assets]
+        #risk_budget = self.n_assets*[1./self.n_assets]
+        risk_budget = [0.5, 0.3, 0.2]
         bnds        = (tuple((0, 1) for _ in range(self.n_assets)))
         cons        = ({'type': 'eq', 'fun': lambda x: np.sum(x) - 1})
         

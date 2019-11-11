@@ -5,18 +5,18 @@ rf = 1.814 #US 10 year tresury
 n_obs = 252*5
 n_assets = 3
 
-mu = np.array([0.08,0.04,0.02]) #annual return 
-ret = np.divide(mu, 252) #daily return
+ann_ret = np.array([0.08,0.04,0.02]) #annual return 
+ret = np.divide(ann_ret, 252) #daily return
 
 ann_vol = [0.16, 0.08, 0.02] #annual volatility
 std = np.diag(np.divide(ann_vol, 252**0.5)) #daily volatility
 
 corr = [1.0, -0.1, 0.0,
         -0.1, 1.0, 0.3,
-         0.0, 0.3, 1.0]
+         0.0, 0.3, 1.0] #correlation matrix
 
 corrMat = np.reshape(corr, (3,3)) #correlation matrix
-covMat = np.dot(std, np.dot(corrMat, std)) # daily covariance matrix
+covMat = np.dot(std, np.dot(corrMat, std)) # daily return covariance matrix
 
 rebalance_days = 21
 n_rebalance = int(252*5/rebalance_days)

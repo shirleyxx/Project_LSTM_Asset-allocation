@@ -29,6 +29,7 @@ for i in range(n_rebalance):
     MK = MarkowitzPortfolio.Portfolio()
     MK.get_returns(returns=sub_returns)
     MK.Markowitz(0.5*min(MK.ann_returns)+0.5*max(MK.ann_returns))  
+    #MK.Markowitz(max(min(MK.ann_returns), 0))
     mk_returns = np.hstack([mk_returns, np.sum(sub_returns*MK.weights, axis=1)])
     
     RP = RiskParityPortfolio.Portfolio()
@@ -67,6 +68,7 @@ for i in np.arange(n_test_period,0,-1):
 
     mk_pred_weights = get_LSTM_predicted_weights(mk_weights_true[:-i*rebalance_days])
     rp_pred_weights = get_LSTM_predicted_weights(rp_weights_true[:-i*rebalance_days])
+   
     mk_returns_pred.extend(np.sum(sub_returns*mk_pred_weights, axis=1).flatten())
     rp_returns_pred.extend(np.sum(sub_returns*rp_pred_weights, axis=1).flatten())
 
