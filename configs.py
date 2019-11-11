@@ -28,3 +28,5 @@ def rand_returns(n_assets=n_assets, n_obs=n_obs, print_result=True):
         print('Simulated correlation matix: \n', np.corrcoef(r.T), '\n')
         print('Simulated annual return: \n', np.mean(r, axis=0)*252, '\n')
     return r
+
+
