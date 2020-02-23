@@ -93,7 +93,7 @@ ax.set_ylabel('Cumulative returns',fontsize=12)
 ax.set_title('Strategies Comparison',fontsize=15)
 
 ###########################################
-### True vs Prediction
+### True values vs Prediction
 ###########################################
 fig, ax = plt.subplots(figsize=(12,8))
 ax.plot(np.cumsum(mk_returns[-n_pred:]),label='Theoretical_Markowitz',color='r',alpha=0.6)
